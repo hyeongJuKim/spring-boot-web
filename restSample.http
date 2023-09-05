@@ -13,19 +13,21 @@ GET http://localhost:8080/coffees/9999
 Accept: application/json
 
 
-### select one(존재하지 않는 데이터)
-GET http://localhost:8080/coffees/8888
-Accept: application/json
-
-
-### put
+### post
 POST http://localhost:8080/coffees
 Content-Type: application/json
 
 {"id" : "9999", "name" : "오늘의커피"}
 
 
-### delete one
+### PUT
+PUT http://localhost:8080/coffees/9999
+Content-Type: application/json
+
+{"id" : "9999", "name" : "아이스 아메리카노"}
+
+
+### delete
 DELETE http://localhost:8080/coffees/9999
 Accept: application/json
 

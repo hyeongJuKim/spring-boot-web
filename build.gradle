@@ -15,6 +15,7 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+
 }
 
 repositories {
@@ -24,8 +25,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation 'net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.12.0'
 
-    //스프링부트 3.0 이상
+    // jsp 설정. 스프링부트 3.0 이상
     implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
     implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '3.0.0'
 

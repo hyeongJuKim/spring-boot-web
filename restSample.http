@@ -1,0 +1,32 @@
+### list
+GET http://localhost:8080/coffees
+Accept: application/json
+
+
+### select one
+GET http://localhost:8080/coffees/5a676d76-9442-4514-8901-4fe68ba44a13
+Accept: application/json
+
+
+### select one
+GET http://localhost:8080/coffees/9999
+Accept: application/json
+
+
+### select one(존재하지 않는 데이터)
+GET http://localhost:8080/coffees/8888
+Accept: application/json
+
+
+### put
+POST http://localhost:8080/coffees
+Content-Type: application/json
+
+{"id" : "9999", "name" : "오늘의커피"}
+
+
+### delete one
+DELETE http://localhost:8080/coffees/9999
+Accept: application/json
+
+

@@ -22,16 +22,16 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.springframework" level="WARN" additivity="false">
+        <Logger name="io.springbootweb" level="INFO" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="file"/>
         </Logger>
-        <Logger name="io.springbootweb" level="DEBUG" additivity="false">
+        <Logger name="org.springframework" level="ERROR" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="file"/>
         </Logger>
 
-        <Root level="debug" additivity="false">
+        <Root level="INFO" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="file"/>
         </Root>

@@ -4,7 +4,7 @@ Accept: application/json
 
 
 ### select one
-GET http://localhost:8080/coffees/5a676d76-9442-4514-8901-4fe68ba44a13
+GET http://localhost:8080/coffees/45f91545-9f75-4f2b-a130-89cbcb57f679
 Accept: application/json
 
 

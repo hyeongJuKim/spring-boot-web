@@ -1,0 +1,13 @@
+###  방식1 2: get prop name
+GET http://localhost:8080/configProp/greeting
+Accept: application/json
+
+
+### 방식1 : get prop coffee
+GET http://localhost:8080/configProp/greeting/coffee
+Accept: application/json
+
+
+### 방식2 : get prop droid
+GET http://localhost:8080/configProp/droid
+Accept: application/json

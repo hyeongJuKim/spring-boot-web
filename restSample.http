@@ -31,4 +31,10 @@ Content-Type: application/json
 DELETE http://localhost:8080/coffees/9999
 Accept: application/json
 
+### actuator
+GET http://localhost:8080/actuator
+
+
+### actuator/health
+GET http://localhost:8080/actuator/health
 

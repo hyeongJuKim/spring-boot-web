@@ -1,0 +1,75 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <title>ppt-gen</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">PPT-GEN</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/templates">템플릿 관리</a>
+                    <a class="nav-link" href="/lyrics">가사 관리</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <form action="/templates" method="POST" enctype="multipart/form-data">
+                <div class="col-lg-6 col-md-8 col-sm-12 col-xs">
+                    <div class="mb-2 row">
+                        <label for="templateName" class="col-sm-3 col-form-label">템플릿명</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="templateName" name="templateName">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="descriptions" class="col-sm-3 col-form-label">설명</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="descriptions" name="descriptions" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <label for="templateFile" class="col-sm-3 col-form-label">첨부파일</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="file" id="templateFile" name="templateFile">
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+
+    // init sample data
+    templateName.value = '23 가을 가사 템플릿';
+    descriptions.value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.';
+
+    const registTemplates = document.getElementById('templates-btn');
+    registTemplates.addEventListener("click", function(){
+        document.forms[0].submit();
+    });
+
+</script>
+</body>
+</html>

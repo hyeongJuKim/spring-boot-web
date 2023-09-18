@@ -22,7 +22,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="io.springbootweb" level="INFO" additivity="false">
+        <Logger name="io.springbootweb" level="DEBUG" additivity="false">
             <AppenderRef ref="console"/>
             <AppenderRef ref="file"/>
         </Logger>

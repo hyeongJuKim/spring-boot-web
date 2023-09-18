@@ -33,7 +33,7 @@
             <form action="/templates" method="POST" enctype="multipart/form-data">
                 <div class="col-lg-6 col-md-8 col-sm-12 col-xs">
                     <div class="mb-2 row">
-                        <label for="templateName" class="col-sm-3 col-form-label">템플릿명</label>
+                        <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="templateName" name="templateName">
                         </div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="mb-2 row">
-                        <label for="templateFile" class="col-sm-3 col-form-label">첨부파일</label>
+                        <label for="templateFile" class="col-sm-3 col-form-label">파일</label>
                         <div class="col-sm-9">
                             <input class="form-control" type="file" id="templateFile" name="templateFile">
                         </div>

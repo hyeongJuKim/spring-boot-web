@@ -26,7 +26,6 @@ public class Template {
     private Long id;
     private String templateName;
     private String descriptions;
-    @ManyToOne
-    @JoinColumn(name = "file_id")
-    private File file;
+    @Column(nullable = true)
+    private Long fileId;
 }

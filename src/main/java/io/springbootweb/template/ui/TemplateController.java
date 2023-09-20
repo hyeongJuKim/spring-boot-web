@@ -1,9 +1,7 @@
 package io.springbootweb.template.ui;
 
 import io.springbootweb.template.application.TemplateService;
-import io.springbootweb.template.domain.Template;
 import io.springbootweb.template.dto.TemplateDTO;
-import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +24,19 @@ public class TemplateController {
     @GetMapping(value = "")
     public String templates(Model model) {
         log.info("templates page");
-        model.addAttribute("templates", new Template());
-        return "templates/templates";
+        model.addAttribute("templates", templateService.selectList());
+        return "templates/template_list";
     }
 
-    @PostMapping(value = "")
-    public String saveTemplate(@ModelAttribute TemplateDTO.Request templateDTO) throws IOException {
+    @GetMapping(value = "/template_regist")
+    public String saveTemplatePage(@ModelAttribute TemplateDTO.Request templateDTO) {
+        log.info("save templates");
+
+        return "templates/template_regist";
+    }
+
+    @PostMapping(value = "/template_regist")
+    public String saveTemplate(@ModelAttribute TemplateDTO.Request templateDTO) throws Exception {
         log.info("save templates");
         templateService.saveTemplate(templateDTO);
 

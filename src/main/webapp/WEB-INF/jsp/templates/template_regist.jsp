@@ -8,8 +8,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
     <script src="/static/js/bootstrap.min.js"></script>
-
     <title>ppt-gen</title>
 </head>
 <body>
@@ -30,7 +30,7 @@
 
     <div class="container">
         <div class="row">
-            <form action="/templates" method="POST" enctype="multipart/form-data">
+            <form action="/templates/template_regist" method="POST" enctype="multipart/form-data">
                 <div class="col-lg-6 col-md-8 col-sm-12 col-xs">
                     <div class="mb-2 row">
                         <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
@@ -61,7 +61,7 @@
 
 <script>
 
-    // init sample data
+    // TODO:: init sample data
     templateName.value = '23 가을 가사 템플릿';
     descriptions.value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.';
 

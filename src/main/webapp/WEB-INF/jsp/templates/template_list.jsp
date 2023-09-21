@@ -27,35 +27,37 @@
             </div>
         </div>
     </nav>
-
     <div style="text-align: center; margin: 50px 0;">
         <h4>템플릿 관리</h4>
     </div>
-    <table class="table">
-        <thead style="text-align: center">
-            <th scope="col">#</th>
-            <th scope="col">템플릿 이름</th>
-            <th scope="col">설명</th>
-            <th scope="col">파일</th>
-            <th scope="col">등록일</th>
-            <th scope="col">수정일</th>
-        </thead>
-        <tbody class="table-group-divider">
-        <c:forEach var="template" items="${templates}">
-            <tr>
-                <td>${template.id}</td>
-                <td>${template.templateName}</td>
-                <td>${template.descriptions}</td>
-                <td style="text-align: center"><c:if test="${not empty template.fileId}"> 🗂 </c:if>️</td>
-                <td style="text-align: center">2022-12-12</td>
-                <td style="text-align: center">2022-12-12</td>
-            </tr>
-        </c:forEach>
-        <c:if test="${empty templates}">
-            <td colspan="6" style="text-align: center">등록된 템플릿이 없습니다.</td>
-        </c:if>
-        </tbody>
-    </table>
+    <form action="" method="get">
+        <input type="hidden" >
+        <table id="templateListTable" class="table">
+            <thead style="text-align: center">
+                <th scope="col">#</th>
+                <th scope="col">템플릿 이름</th>
+                <th scope="col">설명</th>
+                <th scope="col">파일</th>
+                <th scope="col">등록일</th>
+                <th scope="col">수정일</th>
+            </thead>
+            <tbody class="table-group-divider">
+            <c:forEach var="template" items="${templates}">
+                <tr>
+                    <td>${template.id}</td>
+                    <td>${template.templateName}</td>
+                    <td>${template.descriptions}</td>
+                    <td style="text-align: center"><c:if test="${not empty template.uploadFile.id}">&#x1F5C2</c:if>️</td>
+                    <td style="text-align: center">${template.createDate}</td>
+                    <td style="text-align: center">${template.modifiedDate}</td>
+                </tr>
+            </c:forEach>
+            <c:if test="${empty templates}">
+                <td colspan="6" style="text-align: center">등록된 템플릿이 없습니다.</td>
+            </c:if>
+            </tbody>
+        </table>
+    </form>
 
     <div class="mt-5 text-center">
         <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
@@ -63,10 +65,17 @@
 
 
 <script>
+    $(function(){
 
-    const registTemplates = document.getElementById('templates-btn');
-    registTemplates.addEventListener("click", function(){
-        location.href = '/templates/template_regist';
+        $('#templates-btn').on('click', function () {
+            location.href = '/templates/template_regist';
+        });
+
+        $('#templateListTable tbody tr').on('click', function (e) {
+            const id = $(this).find(':first-child').text();
+            location.href = '/templates/'+id;
+        });
+
     });
 
 </script>

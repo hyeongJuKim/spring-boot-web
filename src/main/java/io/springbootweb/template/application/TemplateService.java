@@ -64,6 +64,7 @@ public class TemplateService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<Template> selectList() {
         return templateRepository.findAll();
     }

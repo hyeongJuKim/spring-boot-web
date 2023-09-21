@@ -31,7 +31,7 @@
 
     <div class="container">
         <div class="row">
-            <form action="/templates/template_regist" method="POST" enctype="multipart/form-data">
+            <form id="templateForm" action="/templates/template_regist" method="POST" enctype="multipart/form-data">
                 <div class="col-lg-6 col-md-8 col-sm-12 col-xs">
                     <div class="mb-2 row">
                         <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
@@ -62,13 +62,16 @@
 
 <script>
 
-    // TODO:: init sample data
-    templateName.value = '23 가을 가사 템플릿';
-    descriptions.value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.';
 
-    const registTemplates = document.getElementById('templates-btn');
-    registTemplates.addEventListener("click", function(){
-        document.forms[0].submit();
+    // TODO:: init sample data
+    document.getElementById('templateName').value = '23 가을 가사 템플릿';
+    document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n'
+        + new Date();
+    // TODO:: init sample data
+
+
+    $('#templates-btn').on('click', function () {
+        document.getElementById('templateForm').submit();
     });
 
 </script>

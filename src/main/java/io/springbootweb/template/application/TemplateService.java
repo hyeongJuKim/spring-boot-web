@@ -1,12 +1,16 @@
 package io.springbootweb.template.application;
 
+
 import io.springbootweb.file.domain.FileRepository;
+import io.springbootweb.file.domain.UploadFile;
 import io.springbootweb.file.dto.FileDTO;
 import io.springbootweb.template.domain.Template;
 import io.springbootweb.template.domain.TemplateRepository;
 import io.springbootweb.template.dto.TemplateDTO;
+import jakarta.persistence.EntityNotFoundException;
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,5 +71,12 @@ public class TemplateService {
     @Transactional(readOnly = true)
     public List<Template> selectList() {
         return templateRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Template findById(Long templateId) {
+        Optional<Template> template = templateRepository.findById(templateId);
+        template.orElseThrow(() -> new EntityNotFoundException("템플릿을 찾지못했습니다."));
+        return template.get();
     }
 }

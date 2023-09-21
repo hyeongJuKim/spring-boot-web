@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -26,6 +28,13 @@ public class TemplateController {
         log.info("templates page");
         model.addAttribute("templates", templateService.selectList());
         return "templates/template_list";
+    }
+
+    @GetMapping(value = "/{templateId}")
+    public String template(@PathVariable(name = "templateId") Long templateId, Model model) {
+        log.info("template page");
+        model.addAttribute("template", templateService.findById(templateId));
+        return "templates/template_detail";
     }
 
     @GetMapping(value = "/template_regist")

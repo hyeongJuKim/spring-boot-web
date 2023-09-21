@@ -29,6 +29,7 @@ public class TemplateService {
     @Value("${spring.servlet.multipart.location}")
     private String fileRootPath;
 
+    @Transactional
     public void saveTemplate(TemplateDTO.Request templateRequest) throws Exception {
 
         Template templateEntity = templateRequest.toTemplate();
@@ -50,8 +51,11 @@ public class TemplateService {
                     .path(fileFullPath)
                     .build();
 
-            Long fileId = fileRepository.save(fileDTO.toFile()).getId();
-            templateEntity.setFileId(fileId);
+            UploadFile savedUploadFile = fileRepository.save(fileDTO.toFile());
+
+            log.debug("saved file id: "+ savedUploadFile.getId());
+
+            templateEntity.setUploadFile(savedUploadFile);
         }
         Template save = templateRepository.save(templateEntity);
 

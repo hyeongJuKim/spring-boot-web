@@ -1,6 +1,5 @@
 package io.springbootweb.template.dto;
 
-import io.springbootweb.file.domain.File;
 import io.springbootweb.template.domain.Template;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +16,10 @@ public class TemplateDTO {
 
         public Template toTemplate() {
             return new Template(
-                    null,
                     templateName,
                     descriptions,
+                    null,
+                    null,
                     null
             );
         }

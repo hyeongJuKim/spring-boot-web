@@ -1,6 +1,6 @@
 package io.springbootweb.file.dto;
 
-import io.springbootweb.file.domain.File;
+import io.springbootweb.file.domain.UploadFile;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +13,8 @@ public class FileDTO {
     private String saveName;
     private String path;
 
-    public File toFile() {
-        return File.builder()
-                .id(this.id)
+    public UploadFile toFile() {
+        return UploadFile.builder()
                 .originalName(this.originalName)
                 .saveName(this.saveName)
                 .path(this.path)

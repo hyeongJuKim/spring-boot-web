@@ -10,6 +10,7 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/base.css" rel="stylesheet">
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
     <title>ppt-gen</title>
 </head>
 <body>

@@ -46,7 +46,7 @@
                 <tr>
                     <td>${template.id}</td>
                     <td>${template.templateName}</td>
-                    <td>${template.descriptions}</td>
+                    <td class="txt-ellipsis">${template.descriptions}</td>
                     <td style="text-align: center"><c:if test="${not empty template.uploadFile.id}">&#x1F5C2</c:if>️</td>
                     <td style="text-align: center">${template.createDate}</td>
                     <td style="text-align: center">${template.modifiedDate}</td>

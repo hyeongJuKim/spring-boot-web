@@ -53,7 +53,8 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
+                        <button id="templates-regist" type="button" class="btn btn-sm btn-primary">등록</button>
+                        <button id="templates-back" type="button" class="btn btn-sm btn-secondary">목록</button>
                     </div>
                 </div>
             </form>
@@ -62,7 +63,6 @@
 
 <script>
 
-
     // TODO:: init sample data
     document.getElementById('templateName').value = '23 가을 가사 템플릿';
     document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n'
@@ -70,8 +70,12 @@
     // TODO:: init sample data
 
 
-    $('#templates-btn').on('click', function () {
+    $('#templates-regist').on('click', function () {
         document.getElementById('templateForm').submit();
+    });
+
+    $('#templates-back').on('click', function () {
+        window.history.back();
     });
 
 </script>

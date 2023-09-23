@@ -55,7 +55,8 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
+                        <button id="templates-edit" type="button" class="btn btn-sm btn-primary">수정</button>
+                        <button id="templates-back" type="button" class="btn btn-sm btn-secondary">목록</button>
                     </div>
                 </div>
             </form>
@@ -65,6 +66,10 @@
 <script>
 
     $(function(){
+
+        $('#templates-back').on('click', function () {
+            window.history.back();
+        });
 
     });
 

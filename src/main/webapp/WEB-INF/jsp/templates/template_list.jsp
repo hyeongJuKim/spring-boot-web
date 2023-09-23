@@ -9,6 +9,7 @@
     <link href="/static/css/base.css" rel="stylesheet">
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/commonUtil.js"></script>
     <title>ppt-gen</title>
 </head>
 <body>
@@ -43,7 +44,7 @@
             </thead>
             <tbody class="table-group-divider">
             <c:forEach var="template" items="${templates}">
-                <tr>
+                <tr data-id="${template.id}">
                     <td>${template.id}</td>
                     <td>${template.templateName}</td>
                     <td class="txt-ellipsis">${template.descriptions}</td>
@@ -65,6 +66,7 @@
 
 
 <script>
+
     $(function(){
 
         $('#templates-btn').on('click', function () {
@@ -72,12 +74,13 @@
         });
 
         $('#templateListTable tbody tr').on('click', function (e) {
-            const id = $(this).find(':first-child').text();
-            location.href = '/templates/'+id;
+            const id = $(this).data('id');
+            if (commonUtil.isNotEmpty(id) && id > 0) {
+                location.href = '/templates/'+id;
+            }
         });
 
     });
-
 </script>
 
 </body>

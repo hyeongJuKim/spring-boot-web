@@ -6,6 +6,19 @@
 
 ## Stack
 - Front-End : 
-- Back-End : Java17, Spring Boot
+- Back-End : Java17, Spring Boot3
 - Data : 
 - Build : Gradle
+
+## TODO::
+ - 목록 페이지
+   - [O] 긴 텍스트 내용 .. 처리
+   - [X] 페이징
+ - 상세 페이지
+   - [X] 스타일
+   - [X] textarea 내용 표시 할 때 개행 처리
+   - [X] 파일 다운로드
+   - [O] 뒤로가기, 수정하기
+ - 등록,수정 페이지
+  - [X] 등록 기능
+  - [X] 수정 기능

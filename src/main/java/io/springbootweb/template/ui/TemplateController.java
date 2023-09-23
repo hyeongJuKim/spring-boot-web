@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -26,7 +25,7 @@ public class TemplateController {
     @GetMapping(value = "")
     public String templates(Model model) {
         log.info("templates page");
-        model.addAttribute("templates", templateService.selectList());
+        model.addAttribute("templates", templateService.findAll());
         return "templates/template_list";
     }
 

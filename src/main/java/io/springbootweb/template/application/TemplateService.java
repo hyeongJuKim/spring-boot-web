@@ -69,7 +69,7 @@ public class TemplateService {
     }
 
     @Transactional(readOnly = true)
-    public List<Template> selectList() {
+    public List<Template> findAll() {
         return templateRepository.findAll();
     }
 

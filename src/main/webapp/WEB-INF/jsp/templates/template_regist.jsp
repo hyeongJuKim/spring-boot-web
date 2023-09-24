@@ -31,50 +31,60 @@
 
     <div class="container">
         <div class="row">
-            <form id="templateForm" action="/templates/template_regist" method="POST" enctype="multipart/form-data">
-                <div class="col-lg-6 col-md-8 col-sm-12 col-xs">
-                    <div class="mb-2 row">
-                        <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="templateName" name="templateName">
-                        </div>
-                    </div>
-                    <div class="mb-2 row">
-                        <label for="descriptions" class="col-sm-3 col-form-label">설명</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" id="descriptions" name="descriptions" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="mb-2 row">
-                        <label for="templateFile" class="col-sm-3 col-form-label">파일</label>
-                        <div class="col-sm-9">
-                            <input class="form-control" type="file" id="templateFile" name="templateFile">
-                        </div>
-                    </div>
-
-                    <div class="mt-5 text-center">
-                        <button id="templates-regist" type="button" class="btn btn-sm btn-primary">등록</button>
-                        <button id="templates-back" type="button" class="btn btn-sm btn-secondary">목록</button>
+            <div class="col-6 offset-3">
+                <form id="templateForm" action="/templates/template_regist" method="POST" enctype="multipart/form-data">
+                <div class="mb-2 row">
+                    <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="templateName" name="templateName">
                     </div>
                 </div>
-            </form>
+                <div class="mb-2 row">
+                    <label for="descriptions" class="col-sm-3 col-form-label">설명</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="descriptions" name="descriptions" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="mb-2 row">
+                    <label for="templateFile" class="col-sm-3 col-form-label">파일</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" type="file" id="templateFile" name="templateFile">
+                    </div>
+                </div>
+                    <div class="mb-2 row">
+                        <label for="descriptions" class="col-sm-3 col-form-label">등록일</label>
+                        <div class="col-sm-9">
+                            <input type="text" readonly class="form-control-plaintext" id="createDate" name="createDate" value="">
+                        </div>
+                    </div>
+                <div class="mt-5 text-center">
+                    <button id="templates-regist" type="button" class="btn btn-sm btn-primary">등록</button>
+                    <button id="templates-back" type="button" class="btn btn-sm btn-secondary">목록</button>
+                </div>
+                </form>
+            </div>
         </div>
     </div>
 
 <script>
 
-    // TODO:: init sample data
-    document.getElementById('templateName').value = '23 가을 가사 템플릿';
-    document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n끝';
-    // TODO:: init sample data
+    $(function(){
 
+        // TODO:: init sample data
+        document.getElementById('templateName').value = '23 가을 가사 템플릿';
+        document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n끝';
+        // TODO:: init sample data
 
-    $('#templates-regist').on('click', function () {
-        document.getElementById('templateForm').submit();
-    });
+        $('#createDate').val(new Date().toISOString().split('T')[0]);
 
-    $('#templates-back').on('click', function () {
-        window.history.back();
+        $('#templates-regist').on('click', function () {
+            document.getElementById('templateForm').submit();
+        });
+
+        $('#templates-back').on('click', function () {
+            window.history.back();
+        });
+
     });
 
 </script>

@@ -26,6 +26,7 @@ public class TemplateController {
     public String templates(Model model) {
         log.info("templates page");
         model.addAttribute("templates", templateService.findAll());
+
         return "templates/template_list";
     }
 
@@ -33,12 +34,13 @@ public class TemplateController {
     public String template(@PathVariable(name = "templateId") Long templateId, Model model) {
         log.info("template page");
         model.addAttribute("template", templateService.findById(templateId));
+
         return "templates/template_detail";
     }
 
     @GetMapping(value = "/template_regist")
     public String saveTemplatePage(@ModelAttribute TemplateDTO.Request templateDTO) {
-        log.info("save templates");
+        log.info("save templates page");
 
         return "templates/template_regist";
     }

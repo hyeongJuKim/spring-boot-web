@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmtDt" uri="/WEB-INF/common/tlds/dates.tlds" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,6 @@
     <title>ppt-gen</title>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary mb-3" data-bs-theme="dark">
         <div class="container">
             <a class="navbar-brand" href="/">PPT-GEN</a>
@@ -28,43 +28,48 @@
             </div>
         </div>
     </nav>
-    <div style="text-align: center; margin: 50px 0;">
-        <h4>템플릿 관리</h4>
+
+    <div class="container">
+        <div style="text-align: center; margin: 50px 0;">
+            <h4>템플릿 관리</h4>
+        </div>
+        <div class="row">
+            <div class="col-8 offset-2 col-sm-12 offset-sm-0">
+                <form action="" method="get">
+                    <input type="hidden" >
+                    <table id="templateListTable" class="table">
+                        <thead style="text-align: center">
+                        <th scope="col">#</th>
+                        <th scope="col">템플릿 이름</th>
+                        <th scope="col">설명</th>
+                        <th scope="col">파일</th>
+                        <th scope="col">등록일</th>
+                        <th scope="col">수정일</th>
+                        </thead>
+                        <tbody class="table-group-divider">
+                        <c:forEach var="template" items="${templates}">
+                            <tr data-id="${template.id}">
+                                <td>${template.id}</td>
+                                <td>${template.templateName}</td>
+                                <td class="txt-ellipsis">${template.descriptions}</td>
+                                <td style="text-align: center"><c:if test="${not empty template.uploadFile.id}">&#x1F5C2</c:if>️</td>
+                                <td style="text-align: center"><c:out value="${fmtDt:formatLocalDateTime(template.createDate, 'yyyy-MM-dd')}" /></td>
+                                <td style="text-align: center"><c:out value="${fmtDt:formatLocalDateTime(template.modifiedDate, 'yyyy-MM-dd')}" /></td>
+                            </tr>
+                        </c:forEach>
+                        <c:if test="${empty templates}">
+                            <td colspan="6" style="text-align: center">등록된 템플릿이 없습니다.</td>
+                        </c:if>
+                        </tbody>
+                    </table>
+                </form>
+
+                <div class="mt-5 text-center">
+                    <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <form action="" method="get">
-        <input type="hidden" >
-        <table id="templateListTable" class="table">
-            <thead style="text-align: center">
-                <th scope="col">#</th>
-                <th scope="col">템플릿 이름</th>
-                <th scope="col">설명</th>
-                <th scope="col">파일</th>
-                <th scope="col">등록일</th>
-                <th scope="col">수정일</th>
-            </thead>
-            <tbody class="table-group-divider">
-            <c:forEach var="template" items="${templates}">
-                <tr data-id="${template.id}">
-                    <td>${template.id}</td>
-                    <td>${template.templateName}</td>
-                    <td class="txt-ellipsis">${template.descriptions}</td>
-                    <td style="text-align: center"><c:if test="${not empty template.uploadFile.id}">&#x1F5C2</c:if>️</td>
-                    <td style="text-align: center">${template.createDate}</td>
-                    <td style="text-align: center">${template.modifiedDate}</td>
-                </tr>
-            </c:forEach>
-            <c:if test="${empty templates}">
-                <td colspan="6" style="text-align: center">등록된 템플릿이 없습니다.</td>
-            </c:if>
-            </tbody>
-        </table>
-    </form>
-
-    <div class="mt-5 text-center">
-        <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
-    </div>
-
-
 <script>
 
     $(function(){

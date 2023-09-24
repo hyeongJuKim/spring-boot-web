@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -69,14 +70,17 @@ public class TemplateService {
     }
 
     @Transactional(readOnly = true)
-    public List<Template> findAll() {
-        return templateRepository.findAll();
+    public List<TemplateDTO.Response> findAll() {
+        List<Template> templates = templateRepository.findAll();
+        return templates.stream()
+                .map(TemplateDTO.Response::from)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public Template findById(Long templateId) {
+    public TemplateDTO.Response findById(Long templateId) {
         Optional<Template> template = templateRepository.findById(templateId);
         template.orElseThrow(() -> new EntityNotFoundException("템플릿을 찾지못했습니다."));
-        return template.get();
+        return TemplateDTO.Response.from(template.get());
     }
 }

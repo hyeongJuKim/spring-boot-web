@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<% pageContext.setAttribute("LF", "\n"); %>
+<%
+    pageContext.setAttribute("crcn", "\r\n");
+    pageContext.setAttribute("br", "<br/>");
+%>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -44,13 +48,13 @@
                     <div class="mb-2 row">
                         <label class="col-sm-3 col-form-label">설명</label>
                         <div class="col-sm-9">
-                            <c:out value="${template.descriptions}" />
+                            <c:out value='${fn:replace(template.descriptions, crcn, "<br/>")}' escapeXml="false"/>
                         </div>
                     </div>
                     <div class="mb-2 row">
                         <label class="col-sm-3 col-form-label">파일</label>
                         <div class="col-sm-9">
-                            <c:out value="${fn:replace(template.uploadFile.originalName, LF, '<br/>')}" escapeXml="false"/>
+                            <c:out value="${template.uploadFile.originalName}" />
                         </div>
                     </div>
 

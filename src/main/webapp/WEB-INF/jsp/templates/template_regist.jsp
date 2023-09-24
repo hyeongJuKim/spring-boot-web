@@ -65,8 +65,7 @@
 
     // TODO:: init sample data
     document.getElementById('templateName').value = '23 가을 가사 템플릿';
-    document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n'
-        + new Date();
+    document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n끝';
     // TODO:: init sample data
 
 

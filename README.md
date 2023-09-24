@@ -12,7 +12,7 @@
 
 ## TODO::
  - 공통
-   - LocalDateTime format 변경 태그 라이브러리 생성 
+   - LocalDateTime format 변경 태그 라이브러리 생성
  - 목록 페이지
    - [O] 긴 텍스트 내용 .. 처리
    - [X] 페이징

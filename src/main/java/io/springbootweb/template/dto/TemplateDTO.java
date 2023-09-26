@@ -12,12 +12,14 @@ public class TemplateDTO {
     @Getter
     @Setter
     public class Request {
+        private Long id;
         private String templateName;
         private String descriptions;
         private MultipartFile templateFile;
 
         public Template toTemplate() {
             return new Template(
+                    id,
                     templateName,
                     descriptions,
                     null,

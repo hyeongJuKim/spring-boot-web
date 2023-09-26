@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -38,19 +39,38 @@ public class TemplateController {
         return "templates/template_detail";
     }
 
-    @GetMapping(value = "/template_regist")
+    @GetMapping(value = "/regist")
     public String saveTemplatePage(@ModelAttribute TemplateDTO.Request templateDTO) {
         log.info("save templates page");
 
         return "templates/template_regist";
     }
 
-    @PostMapping(value = "/template_regist")
-    public String saveTemplate(@ModelAttribute TemplateDTO.Request templateDTO) throws Exception {
-        log.info("save templates");
+    @PostMapping(value = "/regist")
+    public String postTemplate(@ModelAttribute TemplateDTO.Request templateDTO) throws Exception {
+        log.info("POST templates");
         templateService.saveTemplate(templateDTO);
 
         return "redirect:/templates";
     }
+
+    @PutMapping(value = "/{templateId}")
+    public String putTemplate(@PathVariable(name = "templateId") Long templateId,
+                              @ModelAttribute TemplateDTO.Request templateDTO) throws Exception {
+        log.info("PUT templates");
+
+        templateService.saveTemplate(templateDTO);
+
+        return "redirect:/templates";
+    }
+
+    @GetMapping(value = "/edit/{templateId}")
+    public String editTemplatePage(@PathVariable(name = "templateId") Long templateId, Model model) {
+        log.info("edit templates page");
+        model.addAttribute("template", templateService.findById(templateId));
+
+        return "templates/template_regist";
+    }
+
 
 }

@@ -63,7 +63,6 @@
                         </tbody>
                     </table>
                 </form>
-
                 <div class="mt-5 text-center">
                     <button id="templates-btn" type="button" class="btn btn-sm btn-primary">등록</button>
                 </div>
@@ -75,7 +74,7 @@
     $(function(){
 
         $('#templates-btn').on('click', function () {
-            location.href = '/templates/template_regist';
+            location.href = '/templates/regist';
         });
 
         $('#templateListTable tbody tr').on('click', function (e) {

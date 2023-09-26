@@ -41,7 +41,8 @@ public class Template {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public Template(String templateName, String descriptions, UploadFile uploadFile, LocalDateTime createDate, LocalDateTime modifiedDate) {
+    public Template(Long id, String templateName, String descriptions, UploadFile uploadFile, LocalDateTime createDate, LocalDateTime modifiedDate) {
+        this.id = id;
         this.templateName = templateName;
         this.descriptions = descriptions;
         this.uploadFile = uploadFile;

@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmtDt" uri="/WEB-INF/common/tlds/dates.tlds" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <%
     pageContext.setAttribute("crcn", "\r\n");
     pageContext.setAttribute("br", "<br/>");
@@ -41,7 +40,8 @@
     <div class="container">
         <div class="row">
             <div class="col-6 offset-3">
-            <form id="" action="/templates/template_regist" method="POST" enctype="multipart/form-data">
+            <form id="" action="/templates/regist" method="POST" enctype="multipart/form-data">
+                <input type="hidden" id="templateId" name="id" value="${template.id}">
                 <div class="mb-2 row">
                     <label class="col-sm-3 col-form-label">템플릿 이름</label>
                     <div class="col-sm-9">
@@ -77,6 +77,9 @@
                     <button id="templates-back" type="button" class="btn btn-sm btn-secondary">목록</button>
                 </div>
             </form>
+            <form id="fileDownload" action="/download/">
+                <input type="hidden" id="fileId" name="fileId">
+            </form>
             </div>
         </div>
     </div>
@@ -84,6 +87,10 @@
 <script>
 
     $(function(){
+
+        $('#templates-edit').on('click', function () {
+            location.href = '/templates/edit/'+document.querySelector('#templateId').value;
+        });
 
         $('#templates-back').on('click', function () {
             window.history.back();

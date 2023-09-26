@@ -32,17 +32,19 @@
     <div class="container">
         <div class="row">
             <div class="col-6 offset-3">
-                <form id="templateForm" action="/templates/template_regist" method="POST" enctype="multipart/form-data">
-                <div class="mb-2 row">
+                <form id="templateForm" action="/templates/regist" method="POST" enctype="multipart/form-data">
+                <input type="hidden" id="templateId" name="id" value="${template.id}">
+                <input type="hidden" id="_method" name="_method" value=""/>
+                    <div class="mb-2 row">
                     <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="templateName" name="templateName">
+                        <input type="text" class="form-control" id="templateName" name="templateName" value="${template.templateName}">
                     </div>
                 </div>
                 <div class="mb-2 row">
                     <label for="descriptions" class="col-sm-3 col-form-label">설명</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" id="descriptions" name="descriptions" rows="3"></textarea>
+                        <textarea class="form-control" id="descriptions" name="descriptions" rows="3">${template.descriptions}</textarea>
                     </div>
                 </div>
                 <div class="mb-2 row">
@@ -69,20 +71,26 @@
 <script>
 
     $(function(){
-
-        // TODO:: init sample data
-        document.getElementById('templateName').value = '23 가을 가사 템플릿';
-        document.getElementById('descriptions').value = '주황색 컬러가 메인인 23 가을 가사 템플릿입니다.\n끝';
-        // TODO:: init sample data
-
         $('#createDate').val(new Date().toISOString().split('T')[0]);
 
         $('#templates-regist').on('click', function () {
-            document.getElementById('templateForm').submit();
+            const templateId = document.querySelector('#templateId').value;
+            const form = document.forms['templateForm'];
+            if (templateId == '') {
+                form.method = 'POST';
+                form.action = '/templates/regist';
+                document.querySelector('#_method').value = 'POST';
+                document.getElementById('templateForm').submit();
+            } else {
+                form.method = 'POST';
+                form.action = '/templates/'+templateId;
+                document.querySelector('#_method').value = 'PUT';
+                document.getElementById('templateForm').submit();
+            }
         });
 
         $('#templates-back').on('click', function () {
-            window.history.back();
+            location.href = '/templates';
         });
 
     });

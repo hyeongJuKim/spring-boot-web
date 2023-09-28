@@ -2,6 +2,7 @@ package io.springbootweb.template.ui;
 
 import io.springbootweb.template.application.TemplateService;
 import io.springbootweb.template.dto.TemplateDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class TemplateController {
         this.templateService = templateService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping
     public String templates(Model model) {
         log.info("templates page");
         model.addAttribute("templates", templateService.findAll());
@@ -46,7 +47,7 @@ public class TemplateController {
         return "templates/template_regist";
     }
 
-    @PostMapping(value = "/regist")
+    @PostMapping
     public String postTemplate(@ModelAttribute TemplateDTO.Request templateDTO) throws Exception {
         log.info("POST templates");
         templateService.saveTemplate(templateDTO);
@@ -58,7 +59,6 @@ public class TemplateController {
     public String putTemplate(@PathVariable(name = "templateId") Long templateId,
                               @ModelAttribute TemplateDTO.Request templateDTO) throws Exception {
         log.info("PUT templates");
-
         templateService.saveTemplate(templateDTO);
 
         return "redirect:/templates";

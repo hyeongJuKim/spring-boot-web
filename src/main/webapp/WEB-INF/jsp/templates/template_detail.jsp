@@ -56,7 +56,7 @@
                 </div>
                 <div class="mb-2 row">
                     <label class="col-sm-3 col-form-label">파일</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9" style="margin: auto;">
                         <a href="/download/${template.uploadFile.id}" target="_blank"><c:out value="${template.uploadFile.originalName}" /></a>
                     </div>
                 </div>

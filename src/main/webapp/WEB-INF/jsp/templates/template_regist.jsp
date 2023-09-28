@@ -1,5 +1,6 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -32,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6 offset-3">
-                <form id="templateForm" action="/templates/regist" method="POST" enctype="multipart/form-data">
+                <form id="templateForm" action="/templates" method="POST" enctype="multipart/form-data">
                 <input type="hidden" id="templateId" name="id" value="${template.id}">
                 <input type="hidden" id="_method" name="_method" value=""/>
                     <div class="mb-2 row">
@@ -78,8 +79,7 @@
             const form = document.forms['templateForm'];
             if (templateId == '') {
                 form.method = 'POST';
-                form.action = '/templates/regist';
-                document.querySelector('#_method').value = 'POST';
+                form.action = '/templates';
                 document.getElementById('templateForm').submit();
             } else {
                 form.method = 'POST';

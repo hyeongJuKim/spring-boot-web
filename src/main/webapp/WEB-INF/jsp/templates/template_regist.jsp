@@ -34,8 +34,8 @@
         <div class="row">
             <div class="col-6 offset-3">
                 <form id="templateForm" action="/templates" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="templateId" name="id" value="${template.id}">
-                <input type="hidden" id="_method" name="_method" value=""/>
+                    <input type="hidden" id="_method" name="_method" value=""/>
+                    <input type="hidden" id="templateId" name="id" value="${template.id}">
                     <div class="mb-2 row">
                     <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
                     <div class="col-sm-9">
@@ -52,6 +52,18 @@
                     <label for="templateFile" class="col-sm-3 col-form-label">파일</label>
                     <div class="col-sm-9">
                         <input class="form-control" type="file" id="templateFile" name="templateFile">
+                        <div id="fileArea" style="margin: 15px 0 0 0;">
+                            <input type="hidden" id="templateFileId" name="templateFileId" value="${empty template.uploadFile.id ? 0 : template.uploadFile.id}">
+                            <input type="hidden" id="fileDelYn" name="fileDelYn">
+                            <c:if test="${empty template.uploadFile}">
+                                <span class="file-name"></span>
+                                <span class="file-del-btn badge rounded-pill text-bg-secondary" style="cursor: pointer; display: none;">X</span>
+                            </c:if>
+                            <c:if test="${not empty template.uploadFile}">
+                                <span class="file-name">${template.uploadFile.originalName}</span>
+                                <span class="file-del-btn badge rounded-pill text-bg-secondary" style="cursor: pointer;">X</span>
+                            </c:if>
+                        </div>
                     </div>
                 </div>
                     <div class="mb-2 row">
@@ -73,6 +85,27 @@
 
     $(function(){
         $('#createDate').val(new Date().toISOString().split('T')[0]);
+
+        $('.file-del-btn').on('click', function () {
+            $('#fileDelYn').val('Y');
+            $('#templateFile').val('');
+            $('#templateFile').css('display', 'inline');
+            $('.file-del-btn').parent().find('.file-name').empty();
+            $('.file-del-btn').css('display', 'none');
+        });
+
+        $('#templateFile').on('change', function () {
+            const fileName = $(this).val().split('\\').pop();
+            if (fileName) {
+                const templateId = document.querySelector('#templateId').value;
+                if (templateId != '') {// 기존에 파일이 있었다면
+                    $('#fileDelYn').val('Y');
+                }
+                $('#templateFile').css('display', 'none');
+                $('#fileArea .file-name').html(fileName);
+                $('.file-del-btn').css('display', 'inline');
+            }
+        });
 
         $('#templates-regist').on('click', function () {
             const templateId = document.querySelector('#templateId').value;

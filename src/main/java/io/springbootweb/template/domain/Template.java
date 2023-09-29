@@ -2,6 +2,7 @@ package io.springbootweb.template.domain;
 
 
 import io.springbootweb.file.domain.UploadFile;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -28,9 +29,11 @@ public class Template {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @Column(nullable = false)
     private String templateName;
+    @Column(nullable = false)
     private String descriptions;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "upload_file_id")
     private UploadFile uploadFile;
     @CreatedDate
@@ -58,9 +61,6 @@ public class Template {
         return uploadFile;
     }
 
-    public void setUploadFileId(UploadFile uploadFile) {
-        this.uploadFile = uploadFile;
-    }
 }
 
 

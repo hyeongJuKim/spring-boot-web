@@ -1,9 +1,8 @@
 package io.springbootweb.template.application;
 
 
-import io.springbootweb.file.domain.FileRepository;
+import io.springbootweb.file.application.FileService;
 import io.springbootweb.file.domain.UploadFile;
-import io.springbootweb.file.dto.FileDTO;
 import io.springbootweb.template.domain.Template;
 import io.springbootweb.template.domain.TemplateRepository;
 import io.springbootweb.template.dto.TemplateDTO;
@@ -11,24 +10,22 @@ import jakarta.persistence.EntityNotFoundException;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
 @Transactional
 public class TemplateService {
-    private final FileRepository fileRepository;
+    private final FileService fileService;
     private final TemplateRepository templateRepository;
 
-    public TemplateService(FileRepository fileRepository, TemplateRepository templateRepository) {
-        this.fileRepository = fileRepository;
+    public TemplateService(FileService fileService, TemplateRepository templateRepository) {
+        this.fileService = fileService;
         this.templateRepository = templateRepository;
     }
 
@@ -37,32 +34,23 @@ public class TemplateService {
 
     @Transactional
     public void saveTemplate(TemplateDTO.Request templateRequest) throws Exception {
-
         Template templateEntity = templateRequest.toTemplate();
-
         MultipartFile file = templateRequest.getTemplateFile();
-        if (!file.isEmpty()) {
-            String fileName = file.getOriginalFilename();
-            String extension = StringUtils.getFilenameExtension(fileName);
-            String fileFullPath = String.format("%s%s.%s", fileRootPath, UUID.randomUUID(), extension);
 
-            file.transferTo(new File(fileFullPath));
-
-            log.debug("file origin name: " + file.getOriginalFilename());
-            log.debug("file pull path: " + fileFullPath);
-
-            FileDTO fileDTO  = FileDTO.builder()
-                    .originalName(file.getOriginalFilename())
-                    .saveName(UUID.randomUUID() + "." + extension)
-                    .path(fileFullPath)
-                    .build();
-
-            UploadFile savedUploadFile = fileRepository.save(fileDTO.toFile());
-
-            log.debug("saved file id: "+ savedUploadFile.getId());
-
-            templateEntity.setUploadFile(savedUploadFile);
+        Long fileId = templateRequest.getTemplateFileId();
+        String fileDelYn = templateRequest.getFileDelYn();
+        boolean isFileUpdate = !"Y".equals(fileDelYn) && fileId > 0;
+        if ("Y".equals(fileDelYn) && fileId > 0) {
+            fileService.deleteFileById(fileId);
         }
+
+        if (!file.isEmpty() && !isFileUpdate) {
+            UploadFile savedUploadFile = fileService.saveFile(file);
+            templateEntity.setUploadFile(savedUploadFile);
+        } else if (file.isEmpty() && isFileUpdate) {
+            templateEntity.setUploadFile(fileService.findById(fileId));
+        }
+
         Template save = templateRepository.save(templateEntity);
 
         if (save == null) {

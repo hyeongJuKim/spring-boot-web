@@ -15,7 +15,9 @@ public class TemplateDTO {
         private Long id;
         private String templateName;
         private String descriptions;
+        private Long templateFileId;
         private MultipartFile templateFile;
+        private String fileDelYn;
 
         public Template toTemplate() {
             return new Template(

@@ -35,19 +35,18 @@ public class TemplateService {
     @Transactional
     public void saveTemplate(TemplateDTO.Request templateRequest) throws Exception {
         Template templateEntity = templateRequest.toTemplate();
-        MultipartFile file = templateRequest.getTemplateFile();
 
         Long fileId = templateRequest.getTemplateFileId();
-        String fileDelYn = templateRequest.getFileDelYn();
-        boolean isFileUpdate = !"Y".equals(fileDelYn) && fileId > 0;
-        if ("Y".equals(fileDelYn) && fileId > 0) {
+        if (templateRequest.isFileDelete()) {
             fileService.deleteFileById(fileId);
         }
 
-        if (!file.isEmpty() && !isFileUpdate) {
-            UploadFile savedUploadFile = fileService.saveFile(file);
-            templateEntity.setUploadFile(savedUploadFile);
-        } else if (file.isEmpty() && isFileUpdate) {
+        MultipartFile file = templateRequest.getTemplateFile();
+        if (!file.isEmpty() && !templateRequest.isFileUpdate()) {
+            // 파일 등록
+            templateEntity.setUploadFile(fileService.saveFile(file));
+        } else if (file.isEmpty() && templateRequest.isFileUpdate()) {
+            // 파일 변경 없음
             templateEntity.setUploadFile(fileService.findById(fileId));
         }
 

@@ -29,6 +29,15 @@ public class TemplateDTO {
                     null
             );
         }
+
+        public boolean isFileDelete() {
+            return ("Y".equals(fileDelYn) && templateFileId > 0);
+        }
+
+        public boolean isFileUpdate() {
+            return (!"Y".equals(fileDelYn) && templateFileId > 0);
+        }
+
     }
 
     public static class Response {

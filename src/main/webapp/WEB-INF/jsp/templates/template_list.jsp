@@ -22,6 +22,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav">
+                    <a class="nav-link" href="/generate">생성</a>
                     <a class="nav-link active" aria-current="page" href="/templates">템플릿 관리</a>
                     <a class="nav-link" href="/lyrics">가사 관리</a>
                 </div>

@@ -15,7 +15,9 @@ public class TemplateDTO {
         private Long id;
         private String templateName;
         private String descriptions;
+        private Long templateFileId;
         private MultipartFile templateFile;
+        private String fileDelYn;
 
         public Template toTemplate() {
             return new Template(
@@ -27,6 +29,15 @@ public class TemplateDTO {
                     null
             );
         }
+
+        public boolean isFileDelete() {
+            return ("Y".equals(fileDelYn) && templateFileId > 0);
+        }
+
+        public boolean isFileUpdate() {
+            return (!"Y".equals(fileDelYn) && templateFileId > 0);
+        }
+
     }
 
     public static class Response {

@@ -23,6 +23,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <div class="navbar-nav">
+                    <a class="nav-link" href="/generate">생성</a>
+                    <a class="nav-link" href="/generate">생성</a>
                     <a class="nav-link active" aria-current="page" href="/templates">템플릿 관리</a>
                     <a class="nav-link" href="/lyrics">가사 관리</a>
                 </div>
@@ -32,10 +34,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-6 offset-3">
+            <div class="col-md-4 offset-2">
                 <form id="templateForm" action="/templates" method="POST" enctype="multipart/form-data">
-                <input type="hidden" id="templateId" name="id" value="${template.id}">
-                <input type="hidden" id="_method" name="_method" value=""/>
+                    <input type="hidden" id="_method" name="_method" value=""/>
+                    <input type="hidden" id="templateId" name="id" value="${template.id}">
                     <div class="mb-2 row">
                     <label for="templateName" class="col-sm-3 col-form-label">템플릿 이름</label>
                     <div class="col-sm-9">
@@ -52,16 +54,31 @@
                     <label for="templateFile" class="col-sm-3 col-form-label">파일</label>
                     <div class="col-sm-9">
                         <input class="form-control" type="file" id="templateFile" name="templateFile">
-                    </div>
-                </div>
-                    <div class="mb-2 row">
-                        <label for="descriptions" class="col-sm-3 col-form-label">등록일</label>
-                        <div class="col-sm-9">
-                            <input type="text" readonly class="form-control-plaintext" id="createDate" name="createDate" value="">
+                        <div id="fileArea" style="margin: 15px 0 0 0;">
+                            <input type="hidden" id="templateFileId" name="templateFileId" value="${empty template.uploadFile.id ? 0 : template.uploadFile.id}">
+                            <input type="hidden" id="fileDelYn" name="fileDelYn">
+                            <c:if test="${empty template.uploadFile}">
+                                <span class="file-name"></span>
+                                <span class="file-del-btn badge rounded-pill text-bg-secondary" style="cursor: pointer; display: none;">X</span>
+                            </c:if>
+                            <c:if test="${not empty template.uploadFile}">
+                                <span class="file-name">${template.uploadFile.originalName}</span>
+                                <span class="file-del-btn badge rounded-pill text-bg-secondary" style="cursor: pointer;">X</span>
+                            </c:if>
                         </div>
                     </div>
+                </div>
+                <div class="mb-2 row">
+                    <label for="descriptions" class="col-sm-3 col-form-label">등록일</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control-plaintext" id="createDate" name="createDate" value="">
+                    </div>
+                </div>
                 <div class="mt-5 text-center">
-                    <button id="templates-regist" type="button" class="btn btn-sm btn-primary">등록</button>
+                    <button id="templates-regist" type="button" class="btn btn-sm btn-primary">
+                        <c:if test="${not empty template.id}">수정</c:if>
+                        <c:if test="${empty template.id}">등록</c:if>
+                    </button>
                     <button id="templates-back" type="button" class="btn btn-sm btn-secondary">목록</button>
                 </div>
                 </form>
@@ -74,19 +91,38 @@
     $(function(){
         $('#createDate').val(new Date().toISOString().split('T')[0]);
 
+        $('.file-del-btn').on('click', function () {
+            $('#fileDelYn').val('Y');
+            $('#templateFile').val('');
+            $('#templateFile').css('display', 'inline');
+            $('.file-del-btn').parent().find('.file-name').empty();
+            $('.file-del-btn').css('display', 'none');
+        });
+
+        $('#templateFile').on('change', function () {
+            const fileName = $(this).val().split('\\').pop();
+            if (fileName) {
+                const templateId = document.querySelector('#templateId').value;
+                if (templateId != '') {// 기존에 파일이 있었다면
+                    $('#fileDelYn').val('Y');
+                }
+                $('#templateFile').css('display', 'none');
+                $('#fileArea .file-name').html(fileName);
+                $('.file-del-btn').css('display', 'inline');
+            }
+        });
+
         $('#templates-regist').on('click', function () {
             const templateId = document.querySelector('#templateId').value;
             const form = document.forms['templateForm'];
             if (templateId == '') {
                 form.method = 'POST';
                 form.action = '/templates';
-                document.getElementById('templateForm').submit();
             } else {
                 form.method = 'POST';
                 form.action = '/templates/'+templateId;
-                document.querySelector('#_method').value = 'PUT';
-                document.getElementById('templateForm').submit();
             }
+            document.getElementById('templateForm').submit();
         });
 
         $('#templates-back').on('click', function () {

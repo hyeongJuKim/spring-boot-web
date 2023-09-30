@@ -7,31 +7,33 @@
 ## Stack
 - Front-End : 
 - Back-End : Java17, Spring Boot3
-- Data : 
+- Data : Jpa, H2
 - Build : Gradle
 
 ## TODO::
  - 공통
-   - LocalDateTime format 변경 태그 라이브러리 생성
- - 목록 페이지
-   - [O] 긴 텍스트 내용 .. 처리
-   - [X] 페이징
- - 상세 페이지
-   - [O] 스타일
-   - [o] textarea 개행 처리
-   - [O] 등록한 파일 다운로드
-     - [x] 파일 객체 : root dir 별도 관리, path에는 그 뒤의 경로만 저장. 
-   - [O] 뒤로가기 버튼
-     - [X] 페이징 유지
-   - [O] 수정하기 버튼
- - 등록,수정 페이지
-  - [O] 등록 기능
-  - [X] 등록 할 때 수정일시 값 설정하지 않기
-  - [O] 수정 기능
-    - [X] 수정일시 등록
-    - [O] 파일 수정(기존파일 물리삭제)
-
-- TODO::
-  - createDT, modDT -> 공통 필드 사용.
-  - nav 공통 선언 -> include, import 등 어떤것을 사용할까?
-  - 가사 상세페이지 줄바꿈 문자열 저장
+   - [X] LocalDateTime format 변경 태그 라이브러리 생성
+   - [X] textarea 개행
+   - [X] show data 개행
+   - [ ] Lyrcies의 필드명 리랙토링
+   - [ ] nav 공통 선언 -> include, import 등 어떤것을 사용할까?
+   - [ ] JPA 쿼리 메시지 출력. https://shanepark.tistory.com/415
+   - [X] file
+     - [X] upload, download
+     - [ ] root dir 별도 관리, path에는 그 뒤의 경로만 저장.
+   - [ ] 등록, 수정과 같은 action일 때 confirm 띄우기
+   - [X] BaseEntity 사용 (createDT, modDT)
+- Template
+  - list
+    - [ ] show list
+    - [ ] paging
+    - [ ] 긴 텍스트내용 ... 처리
+  - regist
+    - [ ] show page
+    - [ ] insert
+      - [ ] 수정일 등록하지 않기
+    - [X] update
+    - [X] file
+- Lyrices
+  - list
+  - regist

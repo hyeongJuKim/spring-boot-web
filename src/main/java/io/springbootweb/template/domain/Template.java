@@ -33,7 +33,8 @@ public class Template extends BaseEntity implements Serializable {
 
     @Column(nullable = false)
     private String templateName;
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 4000)
     private String descriptions;
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)

@@ -29,9 +29,10 @@ public class Lyrics extends BaseEntity implements Serializable {
     @Column(nullable = false)
     private String lyricsName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 4000)
     private String lyrics;
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
+
+    @Column(nullable = false, length = 4000)
     private String descriptions;
 
     @Builder

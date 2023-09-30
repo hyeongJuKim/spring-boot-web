@@ -52,7 +52,7 @@
                 <div class="mb-2 row">
                     <label class="col-sm-3 col-form-label">가사</label>
                     <div class="col-sm-9">
-                        <c:out value="${lyrics.lyrics}" />
+                        <c:out value='${fn:replace(lyrics.lyrics, crcn, "<br/>")}' escapeXml="false"/>
                     </div>
                 </div>
                 <div class="mb-2 row">

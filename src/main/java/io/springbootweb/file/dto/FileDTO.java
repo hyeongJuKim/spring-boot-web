@@ -12,12 +12,14 @@ public class FileDTO {
     private String originalName;
     private String saveName;
     private String path;
+    private String fileDelYn;
 
     public UploadFile toFile() {
         return UploadFile.builder()
                 .originalName(this.originalName)
                 .saveName(this.saveName)
                 .path(this.path)
+                .fileDelYn(this.fileDelYn)
                 .build();
     }
 

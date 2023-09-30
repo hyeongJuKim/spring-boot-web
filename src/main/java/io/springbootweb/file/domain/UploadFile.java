@@ -21,18 +21,23 @@ public class UploadFile {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", unique = true)
     private Long id;
+    @Column(nullable = false)
     private String originalName;
+    @Column(nullable = false)
     private String saveName;
+    @Column(nullable = false)
     private String path;
+    private String delYn;
 
     public void setId(Long id) {
         this.id = id;
     }
 
     @Builder
-    public UploadFile(String originalName, String saveName, String path) {
+    public UploadFile(String originalName, String saveName, String path, String fileDelYn) {
         this.originalName = originalName;
         this.saveName = saveName;
         this.path = path;
+        this.delYn = fileDelYn;
     }
 }

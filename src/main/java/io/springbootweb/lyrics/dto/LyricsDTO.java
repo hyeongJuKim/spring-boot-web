@@ -20,9 +20,7 @@ public class LyricsDTO {
                     id,
                     lyricsName,
                     lyrics,
-                    descriptions,
-                    null,
-                    null
+                    descriptions
             );
         }
     }

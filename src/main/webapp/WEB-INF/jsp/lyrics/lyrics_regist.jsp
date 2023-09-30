@@ -87,6 +87,7 @@
             } else {
                 form.method = 'POST';
                 form.action = '/lyrics/'+lyricsId;
+                document.querySelector('#_method').value = 'PUT';
             }
             document.getElementById('lyricsForm').submit();
         });

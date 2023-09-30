@@ -121,6 +121,7 @@
             } else {
                 form.method = 'POST';
                 form.action = '/templates/'+templateId;
+                document.querySelector('#_method').value = 'PUT';
             }
             document.getElementById('templateForm').submit();
         });

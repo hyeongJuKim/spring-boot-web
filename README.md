@@ -16,7 +16,8 @@
    - [X] textarea 개행
    - [X] show data 개행
    - [ ] Lyrcies의 필드명 리랙토링
-   - [ ] nav 공통 선언 -> include, import 등 어떤것을 사용할까?
+   - [ ] nav header, footer 모듈화 -> include
+     - [ ] tiles 로 변경
    - [ ] JPA 쿼리 메시지 출력. https://shanepark.tistory.com/415
    - [X] file
      - [X] upload, download
